@@ -34,10 +34,10 @@ public class MyJavaStudy02_ans {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-			bw.write("1값을 입력하세요 ");
+			bw.write("첫번째값을 입력하세요 ");
 			bw.flush();
 			int a = Integer.parseInt(br.readLine());
-			bw.write("2값을 입력하세요 ");
+			bw.write("두번째값을 입력하세요 ");
 			bw.flush();
 			int b = Integer.parseInt(br.readLine());
 			bw.write("부호를 입력하세요: ");
