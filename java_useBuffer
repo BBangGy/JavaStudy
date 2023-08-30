@@ -1,1 +1,48 @@
 
+package javaStudy02_buffer;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class MyJavaStudy01_UseBuffer {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//입출력
+		//Scanner 와 println을 쓰는 것 = 삽으로 하나씩 퍼서 옮기는 것
+		//값들을 그때 그때 입력받고, 그때 그때 출력
+		
+		//백준에서 스캐너는 잘 안 쓰임
+		//모든 문제에서 못쓰는건 아닌데  속도를 	중요시하는  문제에선 쓰지 말라고 되어있음.
+		
+		//buffer를 이용하는 방식 = 삽으로 퍼서 트럭에 실어서 한방에 옮기는 방식, 트럭=버퍼
+		//한번에 쭉 받아와서 한번에 쭉 출력.
+		//try catch로 감싸야 버퍼가 사용가능하다.
+		
+		try {
+			//작성하는 방식 2가지(reader,writer 둘 다)
+			//첫번째 방식 - 다 때려 넣는것
+			BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
+			//두번째- inputstreamreader를 따로 선언하는 방식
+			InputStreamReader in = new InputStreamReader(System.in);
+			BufferedReader br2 = new BufferedReader(in);
+			String input = br1.readLine();//nextLine과 비슷하다.
+			//출력 
+			BufferedWriter bw1 = new BufferedWriter(new OutputStreamWriter(System.out));
+			OutputStreamWriter out = new OutputStreamWriter(System.out);
+			BufferedWriter bw2 = new BufferedWriter(out);
+			
+			bw1.write("input value: " + input);
+			bw1.flush();//이거를 호출해줘야지만 화면에 보임... 그 전가지 write 백날 해도 소용없음.
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+	}
+	
+}
