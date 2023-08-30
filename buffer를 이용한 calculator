@@ -1,0 +1,56 @@
+package javaStudy04_file_buffer_practice;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class MyJavaStudy02_ans {
+	public static String cal(int a, int b, char c) {
+		String result ="";
+		switch (c) {
+		case '+':
+			result = a+"+"+b+":"+(a+b);
+			break;
+		case '-':
+			result = a+"-"+b+":"+(a-b);
+			break;
+		case '*':
+			result = a+"*"+b+":"+(a*b);
+			break;
+		case '/':
+			result = a+"/"+b+":"+(a/b);
+			break;
+		default:
+			break;
+		}
+		return result;
+	}
+	
+	public static void main(String[] args) {
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+			bw.write("1값을 입력하세요 ");
+			bw.flush();
+			int a = Integer.parseInt(br.readLine());
+			bw.write("2값을 입력하세요 ");
+			bw.flush();
+			int b = Integer.parseInt(br.readLine());
+			bw.write("부호를 입력하세요: ");
+			bw.flush();
+			char c = br.readLine().charAt(0);
+			BufferedWriter bfw = new BufferedWriter(new FileWriter("./practice.txt"));
+			bfw.newLine();
+			bfw.write(cal(a,b,c));
+			bfw.flush();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}	
+
+}
