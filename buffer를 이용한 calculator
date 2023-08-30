@@ -42,8 +42,9 @@ public class MyJavaStudy02_ans {
 			int b = Integer.parseInt(br.readLine());
 			bw.write("부호를 입력하세요: ");
 			bw.flush();
-			char c = br.readLine().charAt(0);
+			char c = br.readLine().charAt(0);//부호를 읽어들인다. (charAt(0):문자 첫번째를 읽는다.)
 			BufferedWriter bfw = new BufferedWriter(new FileWriter("./practice.txt"));
+			//practice.txt파일에 나온 결과를 적는다.
 			bfw.newLine();
 			bfw.write(cal(a,b,c));
 			bfw.flush();
