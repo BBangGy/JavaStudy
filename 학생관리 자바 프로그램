@@ -140,6 +140,8 @@ public class MyJavaStudy02_ans {
 			String hakgwaName = "";
 			for (Major mm : majors) {
 				if(mm.getMajor_code().equals(ss.getHakgwacode())) {
+					//majorcode와 학과 코드가 같은걸 골라서 major이름을 찾는다. 
+					//학과이름에 getMajor를 넣어준다.
 					hakgwaName = mm.getMajor();
 					break;
 				}
