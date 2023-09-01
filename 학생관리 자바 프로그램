@@ -1,0 +1,151 @@
+package javaStudy01;
+
+import java.util.*;
+
+import javax.swing.plaf.synth.SynthToggleButtonUI;
+
+public class MyJavaStudy02_ans {
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		//major의 리스트이다. 리스트 만드는법 기억하기
+		List<Major> majors = new ArrayList<Major>();
+		List<Student> students = new ArrayList<Student>();
+		
+		majors.add(new Major("001","컴공"));
+		majors.add(new Major("002","경제"));
+		
+		//컴공2명 경제 1한명.
+		students.add(new Student("이동","033","001",2.22));//현재는 001 002만 학과코드있음.
+		students.add(new Student("이동준","031","001",3.42));
+		students.add(new Student("정현규","032","002",4.22));
+		
+		//학과 추가
+		System.out.println("학과를 하나만 입력해주세요.");
+		Scanner s = new Scanner(System.in);
+		String hNum = s.nextLine();
+		boolean isDuplicate = false;
+		try {
+			for (Major m : majors) {
+				if(m.getMajor_code().equals(hNum)) {
+					throw new Exception("중복된학과 번호입니다.");
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			isDuplicate=true;
+		}
+		if(!isDuplicate) {
+			System.out.println("학과명은?");
+			String hName = s.nextLine();
+			majors.add(new Major(hNum,hName));
+		}
+		//학생 추가
+		isDuplicate =false;//학생 체크때도 쓰일 것임.
+		System.out.println("학생을 추가해봅시다.");
+		System.out.println("학번?");
+		String hakbeon = s.nextLine();
+		for (Student student : students) {
+			if(student.getHakbeon().equals(hakbeon)) {
+				System.out.println("해당 학번은 중복입니다.");
+				isDuplicate = true;
+				break;
+			}
+		}
+		if(isDuplicate==false) {//if(!isduplicate)와 같다.
+			System.out.println("학과코드는?");
+			String code = s.nextLine();
+			boolean isExist = false;
+			for(Major major: majors) {
+				if(major.getMajor_code().equals(code)) {
+					isExist=true;
+				}
+			}
+			if(!isExist)
+				throw new Exception("해당 학과 코드는 존재하지 않습니다.");				
+			System.out.println("이름은?");
+			String name = s.nextLine();
+			System.out.println("학점은?");
+			double hakjeom = Double.parseDouble(s.nextLine());
+			students.add(new Student(name,hakbeon,code,hakjeom));
+			
+		}
+		for (Student ss : students) {
+			String result = String.format("이름: %s, 학번:%s, 평점: %.2f", ss.getName(),ss.getHakbeon(),ss.getAvgScore());
+			String hakgwaName = "";
+			for (Major mm : majors) {
+				if(mm.getMajor_code().equals(ss.getHakgwacode())) {
+					hakgwaName = mm.getMajor();
+					break;
+				}
+			}
+			result+= "학과명: "+hakgwaName;
+			System.out.println(result);
+		}
+		//학과를 2개 정도 더 추가하고
+		for(int i=0;i<2;i++) {
+			System.out.println("학과 코드 새로 추가요.");
+			String hCode = s.nextLine();
+			isDuplicate=false;
+			for (Major m : majors) {
+				if(m.getMajor_code().equals(hCode)) {
+					i--;
+					isDuplicate=true;
+					break;
+				}
+			}
+			if(isDuplicate) {
+				continue;
+			}
+			System.out.println("학과명 추가요.");
+			String hName = s.nextLine();
+			majors.add(new Major(hCode,hName));
+		}
+		//학생은 무한대로 추가하되, 중복된 학생이 나오거나 잘못된 학과코드가 나올경우엔 중단.
+		while(true) {
+			System.out.println("학생 학번 추가요.");
+			hakbeon = s.nextLine();
+			isDuplicate=false;
+			for (Student student : students) {
+				if(student.getHakbeon().equals(hakbeon)) {
+					System.out.println("학번중복.");
+					isDuplicate=true;
+					break;
+				}
+			}
+			if(isDuplicate) {
+				break;
+			}
+			boolean isExist =false;
+			System.out.println("학과코드 입력.");
+			String hCode =s.nextLine();
+			for (Major m : majors) {
+				if(m.getMajor_code().equals(hCode)) {
+					isExist=true;
+					break;
+				}
+			}
+			if(!isExist) {
+				System.out.println("존재하지 않는 학과.");
+				break;
+			}
+			System.out.println("이름?");
+			String name = s.nextLine();
+			System.out.println("학점?");
+			double hakjeom = Double.parseDouble(s.nextLine());
+			students.add(new Student(name,hakbeon,hCode,hakjeom));
+		}
+		for (Student ss : students) {
+			String result = String.format("이름: %s, 학번:%s, 평점: %.2f", ss.getName(),ss.getHakbeon(),ss.getAvgScore());
+			String hakgwaName = "";
+			for (Major mm : majors) {
+				if(mm.getMajor_code().equals(ss.getHakgwacode())) {
+					hakgwaName = mm.getMajor();
+					break;
+				}
+			}
+			result+= "학과명: "+hakgwaName;
+			System.out.println(result);
+		}
+	}
+}
