@@ -1,0 +1,65 @@
+package javaStudy01;
+
+import java.util.*;
+import java.util.List;
+
+public class MyJavaStudy03_school_equlas {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		List<Major> majors = new ArrayList<Major>();
+		List<Student> students = new ArrayList<Student>();
+		
+		majors.add(new Major("001","컴퓨터"));
+		majors.add(new Major("002","화학"));
+		//학과 추가.
+		System.out.println("학과 2개 추가.");
+		System.out.println("--------------");
+		Scanner s= new Scanner(System.in);
+		for(int i=0;i<2;i++) {
+			System.out.println("학과code?");
+			String code=s.nextLine();
+			if(majors.contains(new Major(code))) {
+				System.out.println(code+"중복.");
+				i--;
+				continue;
+			}
+			System.out.println("학과명은?");
+			String hName = s.nextLine();
+			majors.add(new Major(code,hName));	
+		}
+		//학생 3추가.
+		System.out.println("학생 추가.");
+		System.out.println("----------------");
+		for(int i=0;i<3;i++) {
+			System.out.println("학번?");
+			String hakbeon = s.nextLine();
+			if(students.contains(new Student(hakbeon))) {
+				System.out.println("학번 중복.");
+				i--;
+				continue;
+			}
+			System.out.println("학과 코드?");
+			String hCode = s.nextLine();
+			if(majors.contains(new Major(hCode))==false) {
+				System.out.println("해당 과 없음.");
+				i--;
+				continue;
+			}
+			System.out.println("이름?");
+			String name = s.nextLine();
+			System.out.println("학점?");
+			double Score = Double.parseDouble(s.nextLine());
+			students.add((new Student(name, hakbeon, hCode, Score)));
+		}
+		for(Student student : students) {
+			String result = 
+					String.format("이름: %s 학번:%s 학점:%.2f", student.getName(),student.getHakbeon(),student.getScore());
+			int idx = majors.indexOf(new Major(student.gethCode()));
+			result += "학과명: " +majors.get(idx).gethName();
+			System.out.println(result);
+		}
+		
+	}
+
+}
